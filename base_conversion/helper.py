@@ -12,6 +12,11 @@ def get_exponents(digit_str):
     return exponents
 
 def get_decimal_from_binary(exponents):
+    '''
+    exponents: list
+    function converts binary to decimal by multipilying the exponents by 2
+    returns int
+    '''
     return sum([2 ** expo for expo in exponents])
 
 
