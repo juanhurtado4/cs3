@@ -1,3 +1,4 @@
+from helper import get_exponents
 import string
 # Hint: Use these string constants to encode/decode hexadecimal digits and more
 # string.digits is '0123456789'
@@ -15,21 +16,9 @@ def decode(digits, base):
     return: int -- integer representation of number (in base 10)"""
     # Handle up to base 36 [0-9a-z]
     assert 2 <= base <= 36, 'base is out of range: {}'.format(base)
-    # TODO: Decode digits from binary (base 2)
-    base_10_conversion = 0
-    digit_length = len(digits) - 1
-    ind = 0
 
-    for exponent in range((digit_length), -1, -1):
-        # import pdb; pdb.set_trace()
-        if digits[ind] == '1':
-            base_10_conversion += 2 ** exponent
-
-        ind += 1
-
-    return base_10_conversion
-    
-    
+    exponents = get_exponents(digits)
+    result = sum([2 ** expo for expo in exponents])
     
     # TODO: Decode digits from hexadecimal (base 16)
     # ...
