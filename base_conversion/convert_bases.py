@@ -16,7 +16,21 @@ def decode(digits, base):
     # Handle up to base 36 [0-9a-z]
     assert 2 <= base <= 36, 'base is out of range: {}'.format(base)
     # TODO: Decode digits from binary (base 2)
-    # ...
+    base_10_conversion = 0
+    digit_length = len(digits) - 1
+    ind = 0
+
+    for exponent in range((digit_length), -1, -1):
+        # import pdb; pdb.set_trace()
+        if digits[ind] == '1':
+            base_10_conversion += 2 ** exponent
+
+        ind += 1
+
+    return base_10_conversion
+    
+    
+    
     # TODO: Decode digits from hexadecimal (base 16)
     # ...
     # TODO: Decode digits from any base (2 up to 36)
