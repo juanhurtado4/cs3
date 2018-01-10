@@ -1,4 +1,9 @@
 def get_exponents(digit_str):
+    '''
+    digit_str: string
+    function gets the exponents from a binary digit string
+    returns list
+    '''
     digit_length = len(digit_str) - 1
     exponents = []
     for number, digit in zip(range(digit_length, -1, -1), digit_str):
