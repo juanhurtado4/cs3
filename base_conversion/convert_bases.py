@@ -17,8 +17,6 @@ def decode(digits, base):
     # Handle up to base 36 [0-9a-z]
     assert 2 <= base <= 36, 'base is out of range: {}'.format(base)
 
-    if base != 2 and base != 16:
-        return
     return convert(digits, base, 10)
     
     
@@ -55,12 +53,11 @@ def convert(digits, base1, base2):
     assert 2 <= base1 <= 36, 'base1 is out of range: {}'.format(base1)
     assert 2 <= base2 <= 36, 'base2 is out of range: {}'.format(base2)
     # TODO: Convert digits from base 2 to base 16 (and vice versa)
-    # ...
-    # TODO: Convert digits from base 2 to base 10 (and vice versa)
-    if base1 == 2 and base2 == 10:
-        exponents = get_exponents(digits)
-        decimal = get_decimal_from_binary(exponents)
-        return decimal
+
+    exponents = get_exponents(digits)
+    decimal = get_decimal_from_binary(exponents)
+    
+    return decimal
     # TODO: Convert digits from base 10 to base 16 (and vice versa)
     # ...
     # TODO: Convert digits from any base to any base (2 up to 36)
