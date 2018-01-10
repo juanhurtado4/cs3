@@ -11,6 +11,8 @@ def get_exponents(digit_str):
             exponents.append(number)
     return exponents
 
+def get_decimal_from_binary(exponents):
+    return sum([2 ** expo for expo in exponents])
 
 
 if __name__ == '__main__':
