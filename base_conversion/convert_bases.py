@@ -1,4 +1,4 @@
-from helper import get_exponents
+from helper import get_exponents, get_decimal_from_binary
 import string
 # Hint: Use these string constants to encode/decode hexadecimal digits and more
 # string.digits is '0123456789'
@@ -17,8 +17,10 @@ def decode(digits, base):
     # Handle up to base 36 [0-9a-z]
     assert 2 <= base <= 36, 'base is out of range: {}'.format(base)
 
-    exponents = get_exponents(digits)
-    result = sum([2 ** expo for expo in exponents])
+    if base != 2 and base != 16:
+        return
+    return convert(digits, base, 10)
+    
     
     # TODO: Decode digits from hexadecimal (base 16)
     # ...
@@ -55,7 +57,10 @@ def convert(digits, base1, base2):
     # TODO: Convert digits from base 2 to base 16 (and vice versa)
     # ...
     # TODO: Convert digits from base 2 to base 10 (and vice versa)
-    # ...
+    if base1 == 2 and base2 == 10:
+        exponents = get_exponents(digits)
+        decimal = get_decimal_from_binary(exponents)
+        return decimal
     # TODO: Convert digits from base 10 to base 16 (and vice versa)
     # ...
     # TODO: Convert digits from any base to any base (2 up to 36)
@@ -79,4 +84,23 @@ def main():
 
 
 if __name__ == '__main__':
-    main()
+    run_test = True
+    if run_test:
+        assert decode('0', 2) == 0
+        assert decode('1', 2) == 1
+        assert decode('10', 2) == 2
+        assert decode('11', 2) == 3
+        assert decode('100', 2) == 4
+        assert decode('101', 2) == 5
+        assert decode('110', 2) == 6
+        assert decode('111', 2) == 7
+        assert decode('1000', 2) == 8
+        assert decode('1001', 2) == 9
+        assert decode('1010', 2) == 10
+        assert decode('1011', 2) == 11
+        assert decode('1100', 2) == 12
+        assert decode('1101', 2) == 13
+        assert decode('1110', 2) == 14
+        assert decode('1111', 2) == 15
+    else:
+        main()
