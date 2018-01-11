@@ -16,6 +16,8 @@ def factorial_iterative(n):
     n: Int
     Returns the product of the integers 1 through n
     '''
+    if n == 0:
+        return 1
     # for number in range(1, n):
     #     n *= number
     # return n
