@@ -1,3 +1,5 @@
+from functools import reduce
+
 def factorial(n):
     """factorial(n) returns the product of the integers 1 through n for n >= 0,
     otherwise raises ValueError for n < 0 or non-integer n"""
@@ -14,11 +16,11 @@ def factorial_iterative(n):
     n: Int
     Returns the product of the integers 1 through n
     '''
-    if n <= 0:
-        raise ValueError('Cannot get factorial of n = {}'.format(n))
-    for number in range(1, n):
-        n *= number
-    return n
+    # for number in range(1, n):
+    #     n *= number
+    # return n
+    return reduce(lambda x, y: x * y, range(1, n), n)
+
 
 def factorial_recursive(n):
     # check if n is one of the base cases
@@ -43,3 +45,10 @@ def main():
 
 if __name__ == '__main__':
     main()
+
+
+
+
+
+
+    
