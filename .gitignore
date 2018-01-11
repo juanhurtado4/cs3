@@ -2,3 +2,5 @@ base_conversion/
 __pycache__/
 recursion/.cache/
 recursion/__pycache__/
+searching_algorithms/.cache/
+
