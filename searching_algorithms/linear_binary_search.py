@@ -44,37 +44,39 @@ def binary_search_iterative(array, item):
 
     sorted_arr = sorted(array)
 
-    subarr_start_position = 0
-    subarr_end_position = len(sorted_arr) - 1
-    subarr_middle_position = get_middle_position(
-                                subarr_start_position, 
-                                subarr_end_position
+    start_position = 0
+    end_position = len(sorted_arr) - 1
+    middle_position = get_middle_position(
+                                start_position, 
+                                end_position
                                 )
 
-    while subarr_start_position < subarr_end_position:
+    while start_position < end_position:
 
-        middle_item = sorted_arr[subarr_middle_position]
+        middle_item = sorted_arr[middle_position]
 
         if are_items_equal(middle_item, item):
-            return subarr_middle_position
+            return middle_position
 
         if is_middle_value_bigger(middle_item, item):
-            subarr_end_position = get_end_position(subarr_middle_position)
+            end_position = get_end_position(middle_position)
 
         else:
-            subarr_start_position = get_start_position(subarr_middle_position)
+            start_position = get_start_position(middle_position)
 
-        subarr_middle_position = get_middle_position(
-                                    subarr_start_position, 
-                                    subarr_end_position
+        middle_position = get_middle_position(
+                                    start_position, 
+                                    end_position
                                     )
 
-    if are_items_equal(sorted_arr[subarr_start_position], item):
-        return subarr_start_position
+    if are_items_equal(sorted_arr[start_position], item):
+        return start_position
     return None
 
-def binary_search_recursive(array, item, left=None, right=None):
-    # TODO: implement binary search recursively here
-    pass
-    # once implemented, change binary_search to call binary_search_recursive
-    # to verify that your recursive implementation passes all tests
+def binary_search_recursive(array, item, start_position=None, right=None, middle=None):
+    sorted_arr = sorted(array)
+
+    if middle == None:
+        middle = sorted_arr[middle]
+
+    # if are_items_equal(middle): return True
