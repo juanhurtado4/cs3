@@ -4,3 +4,4 @@ recursion/.cache/
 recursion/__pycache__/
 searching_algorithms/.cache/
 
+.cache/
