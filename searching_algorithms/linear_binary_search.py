@@ -17,6 +17,15 @@ def linear_search_iterative(array, item):
 
 
 def linear_search_recursive(array, item, index=0):
+    '''
+    Args:
+        array: type array
+        target: type string
+        index: int (default None)
+
+    Function linearly searches for target in array using recursion
+    Returns index if found. None if not found.
+    '''
     if is_empty(array):
         return None
 
@@ -24,21 +33,26 @@ def linear_search_recursive(array, item, index=0):
         return None
     elif are_items_equal(array[index], item):
         return index
-    # elif array[index] == item:
-    #     return index
 
     return linear_search_recursive(array, item, index + 1)
 
 
 def binary_search(array, item):
     """return the index of item in sorted array or None if item is not found"""
-    # implement binary_search_iterative and binary_search_recursive below, then
     # change this to call your implementation to verify it passes all tests
     # return binary_search_iterative(array, item)
     return binary_search_recursive(array, item)
 
 
 def binary_search_iterative(array, target):
+    '''
+    Args:
+        array: type array
+        target: type string
+
+    Function iteratively searches for target in array
+    Returns index if found. None if not found.
+    '''
     if is_empty(array):
         return None
 
@@ -68,6 +82,17 @@ def binary_search_iterative(array, target):
     return None
 
 def binary_search_recursive(array, target, start_position=None, end_position=None, middle_position=None):
+    '''
+    Args:
+        array: type array
+        target: type string
+        start_position: int (default None)
+        middle_position: int (default None)
+        end_position: int (default None)
+
+    Function recursively searches for target in array
+    Returns index if found. None if not found.
+    '''
     sorted_arr = sorted(array)
 
     if middle_position == None:
