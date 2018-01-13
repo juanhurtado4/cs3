@@ -1,11 +1,13 @@
-def get_numerical_value(digit):
+def convert_to_num(alpha_num):
     '''
-    digit: string
+    alpha_num: string
     function converts letter to its correct numerical value
     returns int
     '''
-    return ord(digit) - 87
+    return ord(alpha_num) - 87
 
+def convert_to_alpha(num):
+    pass
 
 if __name__ == '__main__':
     digits = {
