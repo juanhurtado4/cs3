@@ -7,7 +7,12 @@ def convert_to_num(alpha_num):
     return ord(alpha_num) - 87
 
 def convert_to_alpha(num):
-    pass
+    '''
+    num: string
+    function converts num to its correct alpha_numerical letter
+    returns string
+    '''
+    return chr(num + 87)
 
 if __name__ == '__main__':
     digits = {
