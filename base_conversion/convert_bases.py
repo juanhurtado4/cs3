@@ -1,4 +1,4 @@
-from helper import get_exponents, get_decimal_from_binary
+from helper import get_numerical_value
 import string
 # Hint: Use these string constants to encode/decode hexadecimal digits and more
 # string.digits is '0123456789'
@@ -16,15 +16,20 @@ def decode(digits, base):
     return: int -- integer representation of number (in base 10)"""
     # Handle up to base 36 [0-9a-z]
     assert 2 <= base <= 36, 'base is out of range: {}'.format(base)
+    alphabet = string.ascii_lowercase
 
-    return convert(digits, base, 10)
-    
-    
-    # TODO: Decode digits from hexadecimal (base 16)
-    # ...
-    # TODO: Decode digits from any base (2 up to 36)
-    # ...
-
+    digits = digits.lower()
+    exponent = len(digits) - 1
+    decimal_conversion = 0
+    for digit in digits:
+        if digit not in alphabet:
+            decimal_conversion += (base ** exponent) * int(digit)
+            exponent -= 1
+        else:
+            alpha_numerical = get_numerical_value(digit)
+            decimal_conversion += (base ** exponent) * alpha_numerical
+            exponent -= 1
+    return decimal_conversion
 
 def encode(number, base):
     """Encode given number in base 10 to digits in given base.
