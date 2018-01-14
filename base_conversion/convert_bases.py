@@ -8,6 +8,13 @@ import string
 # string.ascii_letters is ascii_lowercase + ascii_uppercase
 # string.printable is digits + ascii_letters + punctuation + whitespace
 
+# TODO: Change line 63 - 70 to deal with updating_decimal with encoded val being a letter, make corrections in helper module. In helper check if encoded_val is a letter. If so convert to num ONLY INSIDE updating_decimal func. DO NOT modify the original
+# TODO: Write test / verify everything
+# TODO: Refactor decode. Change base ** exponent to variable
+# TODO: Refactor decode. abstrac decimal convertion to func
+# TODO: Import remove preceding zeros
+# TODO: Finish convert function
+
 
 def decode(digits, base):
     """Decode given digits in given base to number in base 10.
@@ -54,11 +61,18 @@ def encode(dec_number, base):
 
         base_x_expo = base ** exponent
         encoded_val = get_encoded_val(dec_number, base_x_expo)
+        if encoded_val >= 10: 
+            dec_number = update_decimal(dec_number, base_x_expo, encoded_val)
+            encoded_val = convert_to_alpha(encoded_val)
+            encoded_result += encoded_val
+            continue
+
         encoded_result += str(encoded_val)
         dec_number = update_decimal(dec_number, base_x_expo, encoded_val)
 
-    return int(encoded_result)
+    return encoded_result
 
+print(encode(251, 12))
 def convert(digits, base1, base2):
     """Convert given digits in base1 to digits in base2.
     digits: str -- string representation of number (in base1)
@@ -69,8 +83,7 @@ def convert(digits, base1, base2):
     assert 2 <= base1 <= 36, 'base1 is out of range: {}'.format(base1)
     assert 2 <= base2 <= 36, 'base2 is out of range: {}'.format(base2)
     # TODO: Convert digits from base 2 to base 16 (and vice versa)
-    
-    return decimal
+
     # TODO: Convert digits from base 10 to base 16 (and vice versa)
     # ...
     # TODO: Convert digits from any base to any base (2 up to 36)
