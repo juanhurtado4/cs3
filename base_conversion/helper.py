@@ -1,6 +1,7 @@
 # TODO: Finish type hinting all functions
 # TODO: Add docstrings
 # TODO: Implement remove preceding zeros function
+# TODO: Function to format nunmbers based on colon. Only for numbers of base 36 n up
 
 def convert_to_num(alpha_numerical):
     '''
@@ -8,7 +9,7 @@ def convert_to_num(alpha_numerical):
     function converts letter to its correct numerical value
     returns int
     '''
-    return ord(letter) - 87
+    return ord(alpha_numerical) - 87
 
 # def convert_to_alpha(num: int) -> str:
 def convert_to_alpha(num):
@@ -29,15 +30,13 @@ def get_encoded_val(decimal, number):
 def update_decimal(decimal, number, encoded_val):
     return decimal - (number * int(encoded_val))
 
+def remove_zeros(encoded_val: str):
+    # get the index of the first char that is not a '0'
+    index = [ind for ind, char in enumerate(encoded_val) if char != '0'][0]
+    return encoded_val[index:]
+
 if __name__ == '__main__':
-    digits = {
-        202: '11001010',
-        129: '10000001',
-        250: '11111010',
-        195: '11000011',
-        166: '10100110',
-        7: '111'
-    }
-    for answer, digits in digits.items():
-        result = sum([2 ** expo for expo in exponents])
-        assert result == answer 
+    encoded_strings = ['000120B', '0001020B', '000100Ba', '00010020Ba', '000120Ba', '12b']
+    answers = ['120B', '1020B', '100Ba', '10020Ba', '120Ba', '12b']
+    for string, answer in zip(encoded_strings, answers):
+        assert remove_zeros(string) == answer
