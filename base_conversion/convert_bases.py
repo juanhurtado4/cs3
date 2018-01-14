@@ -57,7 +57,7 @@ def encode(dec_number, base):
         encoded_result += str(encoded_val)
         dec_number = update_decimal(dec_number, base_x_expo, encoded_val)
 
-    return encoded_result
+    return int(encoded_result)
 
 def convert(digits, base1, base2):
     """Convert given digits in base1 to digits in base2.
@@ -69,9 +69,6 @@ def convert(digits, base1, base2):
     assert 2 <= base1 <= 36, 'base1 is out of range: {}'.format(base1)
     assert 2 <= base2 <= 36, 'base2 is out of range: {}'.format(base2)
     # TODO: Convert digits from base 2 to base 16 (and vice versa)
-
-    exponents = get_exponents(digits)
-    decimal = get_decimal_from_binary(exponents)
     
     return decimal
     # TODO: Convert digits from base 10 to base 16 (and vice versa)
