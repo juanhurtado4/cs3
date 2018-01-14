@@ -1,5 +1,7 @@
 # TODO: Finish type hinting all functions
 # TODO: Add docstrings
+# TODO: Implement remove preceding zeros function
+
 def convert_to_num(alpha_numerical):
     '''
     alpha_num: string
