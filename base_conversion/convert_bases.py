@@ -70,9 +70,8 @@ def encode(dec_number, base):
         encoded_result += str(encoded_val)
         dec_number = update_decimal(dec_number, base_x_expo, encoded_val)
 
-    return encoded_result
+    return remove_zeros(encoded_result)
 
-print(encode(251, 12))
 def convert(digits, base1, base2):
     """Convert given digits in base1 to digits in base2.
     digits: str -- string representation of number (in base1)
