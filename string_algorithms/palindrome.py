@@ -1,3 +1,4 @@
+from helper import *
 import string
 # Hint: Use these string constants to ignore capitalization and/or punctuation
 # string.ascii_lowercase is 'abcdefghijklmnopqrstuvwxyz'
@@ -22,11 +23,10 @@ def is_palindrome_iterative(text):
     checks if text is a palindrome
     returns boolean
     '''
-    text = text.lower()
-    left_pos = 0
-    right_pos = len(text) - 1
-    while left_pos < right_pos:
-        if text[left_pos] != text[right_pos]: return False
+    (text, left_pos, right_pos) = assign_variables(text)
+    while left_is_bigger(left_pos, right_pos):
+        # if text[left_pos] in ignore_chars or text[right_pos] in 
+        if chars_dont_match(text[left_pos], text[right_pos]): return False
         else:
             left_pos += 1
             right_pos -= 1
@@ -41,9 +41,9 @@ def is_palindrome_recursive(text, left=None, right=None):
     '''
     if left == None and right == None:
         # assign multiple variables
-        (text, left, right) = (text.lower(), 0, len(text) - 1)
-    if left > right: return True
-    if text[left] != text[right]: return False
+        (text, left, right) = assign_variables(text)
+    if left_is_bigger(left, right): return True
+    if chars_dont_match(text[left], text[right]): return False
     return is_palindrome_recursive(text, left+1, right-1)
 
 
