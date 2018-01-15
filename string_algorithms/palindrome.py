@@ -1,10 +1,4 @@
 from helper import *
-import string
-# Hint: Use these string constants to ignore capitalization and/or punctuation
-# string.ascii_lowercase is 'abcdefghijklmnopqrstuvwxyz'
-# string.ascii_uppercase is 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
-# string.ascii_letters is ascii_lowercase + ascii_uppercase
-
 
 def is_palindrome(text):
     """A string of characters is a palindrome if it reads the same forwards and
@@ -12,8 +6,8 @@ def is_palindrome(text):
     # implement is_palindrome_iterative and is_palindrome_recursive below, then
     # change this to call your implementation to verify it passes all tests
     assert isinstance(text, str), 'input is not a string: {}'.format(text)
-    # return is_palindrome_iterative(text)
-    return is_palindrome_recursive(text)
+    return is_palindrome_iterative(text)
+    # return is_palindrome_recursive(text)
 
 
 def is_palindrome_iterative(text):
@@ -23,15 +17,27 @@ def is_palindrome_iterative(text):
     checks if text is a palindrome
     returns boolean
     '''
-    (text, left_pos, right_pos) = assign_variables(text)
-    while left_is_bigger(left_pos, right_pos):
-        # if text[left_pos] in ignore_chars or text[right_pos] in 
-        if chars_dont_match(text[left_pos], text[right_pos]): return False
+    # Taco n Cat
+    # l = 3, r = 4
+    # l = o, r = 
+    (text, left_pos, right_pos) = assign_starting_vars(text)
+
+    while right_is_bigger(left_pos, right_pos):
+
+        (left_c, right_c) = assign_chars(text, left_pos, right_pos)
+
+        (left_in_alpha, right_in_alpha) = check_in_alphabet(left_c, right_c)
+        
+        if not left_in_alpha or not right_in_alpha: # refactor
+            left_pos = left_pos if left_in_alpha else left_pos + 1 # refactor
+            right_pos = right_pos if right_in_alpha else right_pos - 1 # refact
+            continue
+        if chars_dont_match(left_c, right_c): return False
         else:
             left_pos += 1
             right_pos -= 1
     return True
-
+# taco n cat
 def is_palindrome_recursive(text, left=None, right=None):
     '''
     text: str
