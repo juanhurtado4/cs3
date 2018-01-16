@@ -22,14 +22,14 @@ def is_palindrome_iterative(text):
     while right_is_bigger(left_pos, right_pos):
 
         (left_c, right_c) = assign_chars(text, left_pos, right_pos)
-
-        (left_in_alpha, right_in_alpha) = check_in_alphabet(left_c, right_c)
-
-        if not left_in_alpha or not right_in_alpha: # refactor
-            left_pos = left_pos if left_in_alpha else left_pos + 1 # refactor
-            right_pos = right_pos if right_in_alpha else right_pos - 1 # refact
+            
+        if chars_not_alphabet(left_c, right_c):
+            left_pos = update_position('left', left_pos, left_c)
+            right_pos = update_position('right', right_pos, right_c)
             continue
-        if chars_dont_match(left_c, right_c): return False
+
+        if chars_dont_match(left_c, right_c): 
+            return False
         else:
             left_pos += 1
             right_pos -= 1

@@ -54,6 +54,7 @@ def test_is_palindrome_with_mixed_casing_and_punctuation():
     assert is_palindrome('No, On!') is True
     assert is_palindrome('Dog God?') is True
     assert is_palindrome('Taco? Cat.') is True
+    assert is_palindrome('Taco!!!!!!!!!!Cat.') is True
     assert is_palindrome('Race-Car!!!') is True
     assert is_palindrome('Race Fast, Safe Car...') is True
     assert is_palindrome('Was it a car or a cat I saw?') is True
