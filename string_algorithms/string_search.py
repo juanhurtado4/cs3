@@ -1,7 +1,10 @@
 from palindrome_helper import *
 
 def contains(text, pattern):
-    """Return a boolean indicating whether pattern occurs in text."""
+    """
+    Return a boolean indicating whether pattern occurs in text.
+    Iterative solution
+    """
     assert isinstance(text, str), 'text is not a string: {}'.format(text)
     assert isinstance(pattern, str), 'pattern is not a string: {}'.format(text)
     (text, pattern_pos) = (text.lower(), 0) # assign two vars
@@ -16,6 +19,31 @@ def contains(text, pattern):
     return False
 
 
+# def contains(text, pattern, pattern_pos=None, text_pos=None):
+#     """
+#     Return a boolean indicating whether pattern occurs in text.
+#     Recursive solution
+#     """
+#     if pattern_pos == None:
+#         # TODO: Refactor helper assign_starting_vars func by if statement
+#         # TODO: if contains do below, if palindrome execute default logic
+#         (text, pattern_pos, text_pos) = (text.lower(), 0, 0) # assign two vars
+    
+#     if text_pos >= len(text):
+#         return False
+
+#     pattern_char = pattern[pattern_pos]
+#     text_char = text[text_pos]
+#     if chars_dont_match(text_char, pattern_char):
+#         text_pos += 1
+#         pattern_pos = 0
+#     else:
+#         if pattern_pos >= len(pattern) - 1:
+#             return True
+#         pattern_pos += 1
+#         text_pos += 1
+
+#     return contains(text, pattern, pattern_pos, text_pos)
 
 def find_index(text, pattern):
     """Return the starting index of the first occurrence of pattern in text,
