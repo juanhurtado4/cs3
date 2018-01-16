@@ -7,17 +7,25 @@ def contains(text, pattern):
     """
     assert isinstance(text, str), 'text is not a string: {}'.format(text)
     assert isinstance(pattern, str), 'pattern is not a string: {}'.format(text)
+    if len(pattern) == 0: return True
     (text, pattern_pos) = (text.lower(), 0) # assign two vars
-    for char in text:
+    for char_pos, char in enumerate(text):
+        if pattern_pos >= len(pattern):
+            pattern_pos = 0
         pattern_char = pattern[pattern_pos]
         if chars_dont_match(char, pattern_char):
-            pattern_pos = 0
+
+            first_pattern_char = pattern[0] # refactor
+            if chars_dont_match(char, first_pattern_char):
+                pattern_pos = 0
+            else:
+                pattern_pos = 1
+
         else:
             if pattern_pos >= len(pattern) - 1:
                 return True
             pattern_pos += 1
     return False
-
 
 # def contains(text, pattern, pattern_pos=None, text_pos=None):
 #     """
