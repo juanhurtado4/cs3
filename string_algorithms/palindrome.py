@@ -1,4 +1,4 @@
-from helper import *
+from palindrome_helper import *
 
 def is_palindrome(text):
     """A string of characters is a palindrome if it reads the same forwards and
