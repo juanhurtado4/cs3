@@ -1,3 +1,4 @@
+# TODO: Add function docstrings
 def assign_starting_vars(text):
     return (text.lower(), 0, len(text) -1 )
 
