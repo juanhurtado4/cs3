@@ -17,9 +17,6 @@ def is_palindrome_iterative(text):
     checks if text is a palindrome
     returns boolean
     '''
-    # Taco n Cat
-    # l = 3, r = 4
-    # l = o, r = 
     (text, left_pos, right_pos) = assign_starting_vars(text)
 
     while right_is_bigger(left_pos, right_pos):
@@ -27,7 +24,7 @@ def is_palindrome_iterative(text):
         (left_c, right_c) = assign_chars(text, left_pos, right_pos)
 
         (left_in_alpha, right_in_alpha) = check_in_alphabet(left_c, right_c)
-        
+
         if not left_in_alpha or not right_in_alpha: # refactor
             left_pos = left_pos if left_in_alpha else left_pos + 1 # refactor
             right_pos = right_pos if right_in_alpha else right_pos - 1 # refact
@@ -37,7 +34,7 @@ def is_palindrome_iterative(text):
             left_pos += 1
             right_pos -= 1
     return True
-# taco n cat
+
 def is_palindrome_recursive(text, left=None, right=None):
     '''
     text: str
