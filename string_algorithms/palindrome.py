@@ -6,8 +6,8 @@ def is_palindrome(text):
     # implement is_palindrome_iterative and is_palindrome_recursive below, then
     # change this to call your implementation to verify it passes all tests
     assert isinstance(text, str), 'input is not a string: {}'.format(text)
-    return is_palindrome_iterative(text)
-    # return is_palindrome_recursive(text)
+    # return is_palindrome_iterative(text)
+    return is_palindrome_recursive(text)
 
 
 def is_palindrome_iterative(text):
@@ -21,6 +21,7 @@ def is_palindrome_iterative(text):
 
     while right_is_bigger(left_pos, right_pos):
 
+        # assign multiple variables
         (left_c, right_c) = assign_chars(text, left_pos, right_pos)
             
         if chars_not_alphabet(left_c, right_c):
@@ -44,9 +45,21 @@ def is_palindrome_recursive(text, left=None, right=None):
     '''
     if left == None and right == None:
         # assign multiple variables
-        (text, left, right) = assign_variables(text)
-    if left_is_bigger(left, right): return True
+        (text, left, right) = assign_starting_vars(text)
+
+    if not right_is_bigger(left, right): return True
+
+    # assign multiple variables
+    (left_c, right_c) = assign_chars(text, left, right)
+
+    if chars_not_alphabet(left_c, right_c):
+            left = update_position('left', left, left_c)
+            right = update_position('right', right, right_c)
+            return is_palindrome_recursive(text, left, right)
+    
+    # not a palindrome
     if chars_dont_match(text[left], text[right]): return False
+
     return is_palindrome_recursive(text, left+1, right-1)
 
 
