@@ -4,13 +4,15 @@ def assign_starting_vars(text):
 def assign_chars(text, left, right):
     return (text[left], text[right])
 
-def check_in_alphabet(char, char2):
-    char_result = True if char.isalpha() else False
-    char2_result = True if char2.isalpha() else False
-    return (char_result, char2_result)
+def chars_not_alphabet(char, char2):
+    return False if char.isalpha() and char2.isalpha() else True
 
-# def left_is_bigger(left, right):
-#     return True if left > right else False
+def update_position(direction, old_pos, char):
+    if direction == 'left':
+        return old_pos if char.isalpha() else old_pos + 1
+    else:
+        return old_pos if char.isalpha() else old_pos - 1
+
 def right_is_bigger(left, right):
     return True if left < right else False
 
