@@ -1,5 +1,6 @@
 from palindrome_helper import *
 
+
 def contains(text, pattern):
     """
     Return a boolean indicating whether pattern occurs in text.
@@ -7,25 +8,26 @@ def contains(text, pattern):
     """
     assert isinstance(text, str), 'text is not a string: {}'.format(text)
     assert isinstance(pattern, str), 'pattern is not a string: {}'.format(text)
-    if len(pattern) == 0: return True
-    (text, pattern_pos) = (text.lower(), 0) # assign two vars
-    for char_pos, char in enumerate(text):
-        if pattern_pos >= len(pattern):
-            pattern_pos = 0
+    if len(pattern) == 0:
+        return True
+    (text, pattern_pos) = (text.lower(), 0)  # assign two vars
+    match = False
+    for char in text:
         pattern_char = pattern[pattern_pos]
-        if chars_dont_match(char, pattern_char):
-
-            first_pattern_char = pattern[0] # refactor
-            if chars_dont_match(char, first_pattern_char):
-                pattern_pos = 0
-            else:
-                pattern_pos = 1
-
-        else:
-            if pattern_pos >= len(pattern) - 1:
-                return True
+        if pattern_found(pattern, pattern_pos, char):
+            return True
+        elif chars_match(char, pattern_char):
+            match = True
             pattern_pos += 1
-    return False
+        else:
+            if chars_match(char, pattern[0]) and pattern_pos > 0:
+                match = True
+                pattern_pos = 1
+                continue
+            match = False
+            pattern_pos = 0
+
+    return match
 
 # def contains(text, pattern, pattern_pos=None, text_pos=None):
 #     """
@@ -37,6 +39,8 @@ def contains(text, pattern):
 #         # TODO: if contains do below, if palindrome execute default logic
 #         (text, pattern_pos, text_pos) = (text.lower(), 0, 0) # assign two vars
     
+#     if len(pattern) == 0: return True
+
 #     if text_pos >= len(text):
 #         return False
 
@@ -64,9 +68,13 @@ def find_index(text, pattern):
 def find_all_indexes(text, pattern):
     """Return a list of starting indexes of all occurrences of pattern in text,
     or an empty list if not found."""
-    assert isinstance(text, str), 'text is not a string: {}'.format(text)
-    assert isinstance(pattern, str), 'pattern is not a string: {}'.format(text)
-    # TODO: Implement find_all_indexes here (iteratively and/or recursively)
+    pass
+    # if len(pattern) == 0: return all_index_text(text)
+    
+    # (patter_pos, pattern_char)
+
+# print(find_all_indexes('adakdadn', 'da'))
+
 
 
 def test_string_algorithms(text, pattern):
