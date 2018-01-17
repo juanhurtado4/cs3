@@ -26,6 +26,7 @@ def test_linear_search_with_items_not_in_list():
 def test_binary_search_with_items_in_list():
     # binary search requires list values to be in sorted order
     names = ['Alex', 'Brian', 'Julia', 'Kojin', 'Nabil', 'Nick', 'Winnie']
+    names2 = ['Alex', 'Julia', 'Kojin', 'Nabil', 'Nick', 'Nicko', 'Winnie']
     # binary search should return the index of each item in the list
     assert binary_search(names, 'Alex') == 0
     assert binary_search(names, 'Brian') == 1
@@ -34,14 +35,14 @@ def test_binary_search_with_items_in_list():
     assert binary_search(names, 'Nabil') == 4
     assert binary_search(names, 'Nick') == 5
     assert binary_search(names, 'Winnie') == 6
+    assert binary_search(names2, 'Nick') == 4
+    assert binary_search(names2, 'Nicko') == 5
 
 def test_binary_search_with_items_not_in_list():
     # binary search requires list values to be in sorted order
     names = ['Alex', 'Brian', 'Julia', 'Kojin', 'Nabil', 'Nick', 'Winnie']
+    names2 = ['Alex', 'Julia', 'Kojin', 'Nabil', 'Nick', 'Nicko', 'Winnie']
     # binary search should return None for any item not in the list
     assert binary_search(names, 'Jeremy') is None
     assert binary_search(names, 'nobody') is None
-
-
-# if __name__ == '__main__':
-#     unittest.main()
+    assert binary_search(names2, 'Nicky') is None
