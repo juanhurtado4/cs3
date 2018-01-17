@@ -1,6 +1,5 @@
 from palindrome_helper import *
 
-
 def contains(text, pattern):
     """
     Return a boolean indicating whether pattern occurs in text.
@@ -8,22 +7,29 @@ def contains(text, pattern):
     """
     assert isinstance(text, str), 'text is not a string: {}'.format(text)
     assert isinstance(pattern, str), 'pattern is not a string: {}'.format(text)
+
     if len(pattern) == 0:
         return True
+
     (text, pattern_pos) = (text.lower(), 0)  # assign two vars
     match = False
+
     for char in text:
         pattern_char = pattern[pattern_pos]
+
         if pattern_found(pattern, pattern_pos, char):
             return True
+
         elif chars_match(char, pattern_char):
             match = True
             pattern_pos += 1
+
         else:
-            if chars_match(char, pattern[0]) and pattern_pos > 0:
+            if chars_overlap(char, pattern[0], pattern_pos):
                 match = True
                 pattern_pos = 1
                 continue
+
             match = False
             pattern_pos = 0
 
@@ -62,30 +68,74 @@ def find_index(text, pattern):
     or None if not found."""
     assert isinstance(text, str), 'text is not a string: {}'.format(text)
     assert isinstance(pattern, str), 'pattern is not a string: {}'.format(text)
-    # TODO: Implement find_index here (iteratively and/or recursively)
 
+    if len(pattern) == 0:
+        return 0
+
+    (text, pattern_pos) = (text.lower(), 0)  # assign two vars
+
+    starting_index = None
+    for char_ind, char in enumerate(text):
+
+        pattern_char = pattern[pattern_pos]
+
+        if pattern_found(pattern, pattern_pos, char):
+            return log_index(char_ind, starting_index, pattern, True)
+
+        elif chars_match(char, pattern_char):
+            pattern_pos += 1
+
+        else:
+            if chars_overlap(char, pattern[0], pattern_pos):
+                pattern_pos = 1
+                continue
+
+            pattern_pos = 0
+
+    return starting_index
 
 def find_all_indexes(text, pattern):
     """Return a list of starting indexes of all occurrences of pattern in text,
     or an empty list if not found."""
-    pass
-    # if len(pattern) == 0: return all_index_text(text)
-    
-    # (patter_pos, pattern_char)
+    assert isinstance(text, str), 'text is not a string: {}'.format(text)
+    assert isinstance(pattern, str), 'pattern is not a string: {}'.format(text)
 
-# print(find_all_indexes('adakdadn', 'da'))
+    if len(pattern) == 0:
+        return get_all_indexes(text)
+
+    (text, pattern_pos) = (text.lower(), 0)  # assign two vars
+
+    index_arr = []
+    for char_ind, char in enumerate(text):
+        pattern_char = pattern[pattern_pos]
+
+        if pattern_found(pattern, pattern_pos, char):
+            index_arr = log_index(char_ind, index_arr, pattern)
+
+        elif chars_match(char, pattern_char):
+            pattern_pos += 1
+
+        else:
+            if chars_overlap(char, pattern[0], pattern_pos):
+                pattern_pos = 1
+                continue
+
+            pattern_pos = 0
+
+    return index_arr
+    
 
 
 
 def test_string_algorithms(text, pattern):
     found = contains(text, pattern)
     print('contains({!r}, {!r}) => {}'.format(text, pattern, found))
-    # # TODO: Uncomment these lines after you implement find_index
-    # index = find_index(text, pattern)
-    # print('find_index({!r}, {!r}) => {}'.format(text, pattern, index))
-    # # TODO: Uncomment these lines after you implement find_all_indexes
-    # indexes = find_all_indexes(text, pattern)
-    # print('find_all_indexes({!r}, {!r}) => {}'.format(text, pattern, indexes))
+    # TODO: Uncomment these lines after you implement find_index
+    index = find_index(text, pattern)
+    print('find_index({!r}, {!r}) => {}'.format(text, pattern, index))
+    # TODO: Uncomment these lines after you implement find_all_indexes
+    indexes = find_all_indexes(text, pattern)
+    print('find_all_indexes({!r}, {!r}) => {}'.format(text, pattern, indexes))
 
 
 def main():
