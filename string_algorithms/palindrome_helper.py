@@ -21,7 +21,7 @@ def chars_dont_match(char, char2):
     return True if char != char2 else False
 
 # Helper for string_search.py
-def all_index_text(string):
+def get_all_indexes(string):
     return [num for num in range(len(string))]
 
 def pattern_found(pattern, pos, text_char):
@@ -33,3 +33,14 @@ def pattern_found(pattern, pos, text_char):
 
 def chars_match(char, char2):
     return True if char == char2 else False
+
+def log_index(index, arr, pattern, return_one=None):
+    index = index - (len(pattern) - 1)
+    if return_one: return index
+    arr.append(index)
+    return arr
+
+def chars_overlap(char, pattern_char, pos):
+    if chars_match(char, pattern_char) and pos > 0:
+        return True
+    return False
