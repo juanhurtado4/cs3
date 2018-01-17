@@ -19,3 +19,17 @@ def right_is_bigger(left, right):
 
 def chars_dont_match(char, char2):
     return True if char != char2 else False
+
+# Helper for string_search.py
+def all_index_text(string):
+    return [num for num in range(len(string))]
+
+def pattern_found(pattern, pos, text_char):
+    at_last_position = pos == (len(pattern) - 1)
+    if at_last_position and chars_match(pattern[pos], text_char): 
+        return True
+    else: 
+        return False
+
+def chars_match(char, char2):
+    return True if char == char2 else False
