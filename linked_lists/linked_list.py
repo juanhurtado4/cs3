@@ -104,14 +104,10 @@ class LinkedList():
         new_node = Node(item)
 
         if index == 0:
-            new_node.next = self.head
-            self.head = new_node
-            self.size += 1
+            self.prepend(new_node)
             return
         elif index == (self.size - 1):
-            self.tail.next = new_node
-            self.tail = new_node
-            self.size += 1
+            self.append(new_node)
             return
 
         prev_node = None
@@ -128,7 +124,7 @@ class LinkedList():
 
     def append(self, item):
         """Insert the given item at the tail of this linked list.
-        Best and worst case running time: ??? under what conditions? [TODO]"""
+        Best and worst case running time: O(1) for both scenarios"""
         # Create a new node to hold the given item
         new_node = Node(item)
         # Check if this linked list is empty
@@ -144,7 +140,7 @@ class LinkedList():
 
     def prepend(self, item):
         """Insert the given item at the head of this linked list.
-        Best and worst case running time: ??? under what conditions? [TODO]"""
+        Best and worst case running time: O(1) for both scenarios """
         # Create a new node to hold the given item
         new_node = Node(item)
         # Check if this linked list is empty
@@ -202,7 +198,7 @@ class LinkedList():
 
     def delete(self, item):
         """Delete the given item from this linked list, or raise ValueError.
-        Best case running time: ??? under what conditions? [TODO]
+        Best case running time: O(1) constant operations to reasign pointers if item is head
         Worst case running time: ??? under what conditions? [TODO]"""
         # Start at the head node
         node = self.head
