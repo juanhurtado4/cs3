@@ -77,8 +77,11 @@ class LinkedList():
         # Check if the given index is out of range and if so raise an error
         if not (0 <= index < self.size):
             raise ValueError('List index out of range: {}'.format(index))
+
         if index == 0:
             return self.head.data
+        elif index == (self.size - 1):
+            return self.tail.data
 
         node = self.head
         node_index = 0
@@ -97,13 +100,25 @@ class LinkedList():
         # Check if the given index is out of range and if so raise an error
         if not (0 <= index <= self.size):
             raise ValueError('List index out of range: {}'.format(index))
-        # node = self.head
-        # node_index = 0
-        # while node is not None:
-        #     node = node.next
-        #     node_index += 1
-        #     if node_index == index:
-        #         return node.data
+        
+        new_node = Node(item)
+
+        if index == 0:
+            new_node.next = self.head
+            self.head = new_node
+            return
+
+        prev_node = None
+        curr_node = self.head
+        node_index = 0
+        while curr_node is not None:
+            prev_node = curr_node
+            curr_node = curr_node.next
+            node_index += 1
+            if node_index == index:
+                new_node.next = curr_node
+                prev_node.next = new_node
+        self.size += 1
 
     def append(self, item):
         """Insert the given item at the tail of this linked list.
