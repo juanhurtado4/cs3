@@ -99,15 +99,16 @@ class LinkedList():
         Worst case running time: O(n) if index is the second to last node. Iterate through entire ll to find the node"""
         # Check if the given index is out of range and if so raise an error
         if not (0 <= index <= self.size):
-            raise ValueError('List index out of range: {}'.format(index))
+            return None
+            # raise ValueError('List index out of range: {}'.format(index))
         
         new_node = Node(item)
 
         if index == 0:
-            self.prepend(new_node)
+            self.prepend(item)
             return
         elif index == (self.size - 1):
-            self.append(new_node)
+            self.append(item)
             return
 
         prev_node = None
