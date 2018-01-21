@@ -95,8 +95,8 @@ class LinkedList():
     def insert_at_index(self, index, item):
         """Insert the given item at the given index in this linked list, or
         raise ValueError if the given index is out of range of the list size.
-        Best case running time: ??? under what conditions? [TODO]
-        Worst case running time: ??? under what conditions? [TODO]"""
+        Best case running time: O(1) if the index is head or tail. Just a few constant time operations to reasign head or tail.
+        Worst case running time: O(n) if index is the second to last node. Iterate through entire ll to find the node"""
         # Check if the given index is out of range and if so raise an error
         if not (0 <= index <= self.size):
             raise ValueError('List index out of range: {}'.format(index))
@@ -106,6 +106,12 @@ class LinkedList():
         if index == 0:
             new_node.next = self.head
             self.head = new_node
+            self.size += 1
+            return
+        elif index == (self.size - 1):
+            self.tail.next = new_node
+            self.tail = new_node
+            self.size += 1
             return
 
         prev_node = None
