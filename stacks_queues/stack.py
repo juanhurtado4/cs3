@@ -32,13 +32,17 @@ class LinkedStack(object):
     def peek(self):
         """Return the item on the top of this stack without removing it,
         or None if this stack is empty."""
-        return self.list.head
+        if self.list.is_empty():
+            return None
+        return self.list.head.data
 
     def pop(self):
         """Remove and return the item on the top of this stack,
         or raise ValueError if this stack is empty.
         Running time: O(???) – Why? [TODO]"""
-        self.list.delete(self.head.data)
+        last_item = self.list.head.data
+        self.list.delete(self.list.head.data)
+        return last_item
 
 
 # Implement ArrayStack below, then change the assignment at the bottom
@@ -73,7 +77,7 @@ class ArrayStack(object):
     def peek(self):
         """Return the item on the top of this stack without removing it,
         or None if this stack is empty."""
-        if self.list.is_empty():
+        if self.is_empty():
             return None
 
         return self.list[-1]
@@ -82,12 +86,12 @@ class ArrayStack(object):
         """Remove and return the item on the top of this stack,
         or raise ValueError if this stack is empty.
         Running time: O(1) Because we can pop the last item of the array in constant time, since arrays gives us straight access to the last item"""
-        if self.list.is_empty():
+        if self.is_empty():
             return None
-        self.list.pop(-1)
+        return self.list.pop(-1)
 
 
 # Implement LinkedStack and ArrayStack above, then change the assignment below
 # to use each of your Stack implementations to verify they each pass all tests
-Stack = LinkedStack
-# Stack = ArrayStack
+# Stack = LinkedStack
+Stack = ArrayStack
