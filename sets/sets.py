@@ -1,5 +1,7 @@
 from hashtable import HashTable
 
+# TODO: Add documentation
+
 class Set():
     def __init__(self, elements=None):
         self.set = HashTable()
@@ -26,52 +28,45 @@ class Set():
         raise KeyError("Cannot remove nonexistant element")
 
     def union(self, other_set):
-        if are_sets_empty(self.set, other_set):
+        if self.get_size() == 0 and other_set.get_size() == 0:
             raise ValueError('Cannot unify empty sets')
 
-        return manipulate_sets('union', self.set, other_set)
+        return self.manipulate_sets('union', other_set)
 
     def intersection(self, other_set):
-        if are_sets_empty(self.set, other_set):
+        if self.get_size() == 0 and other_set.get_size() == 0:
             return self.set
         
-        return manipulate_sets('intersect', self.set, other_set)
+        return self.manipulate_sets('intersect', other_set)
 
     def difference(self, other_set):
-        if are_sets_empty(self.set, other_set):
+        if self.get_size() == 0 and other_set.get_size() == 0:
             return self.set
         
-        return manipulate_sets('diff', self.set, other_set)
+        return self.manipulate_sets('diff', other_set)
 
+    def is_subset(self, other_set):
+        if other_set.get_size() > self.get_size():
+            return False
+        subset = self.manipulate_sets('intersect', other_set)
 
+        return True if subset.get_size() == other_set.get_size() else False
 
-def manipulate_sets(operation, set1, set2):
+    def manipulate_sets(self, operation, set2):
 
-    new_set = Set()
-    for key, value in set2.set.items():
-        if operation == 'union':
-            if not set1.contains(key):
-                set1.add(key, value)
+        new_set = Set()
+        for key, value in set2.set.items():
+            if operation == 'union':
+                if not self.contains(key):
+                    self.add(key)
 
-        elif operation == 'intersect':
-            if set1.contains(key):
-                new_set.add(key, value)
+            elif operation == 'intersect':
+                if self.contains(key):
+                    new_set.add(key)
 
-        elif operation == 'diff':
-            if not set1.contains(key):
-                new_set.add(key, value)
+            elif operation == 'diff':
+                if not self.contains(key):
+                    new_set.add(key)
 
-    return set1 if operation == 'union' else new_set
+        return self if operation == 'union' else new_set
 
-    
-        
-        
-    
-
-
-
-
-
-def are_sets_empty(set1, set2):
-    sets_empty = set1.get_size() == 0 and set2.get_size() == 0
-    return True if sets_empty else False
