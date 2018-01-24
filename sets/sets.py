@@ -35,25 +35,42 @@ class Set():
         if are_sets_empty(self.set, other_set):
             return self.set
         
-        return manipulate_sets()
+        return manipulate_sets('intersect', self.set, other_set)
 
+    def difference(self, other_set):
+        if are_sets_empty(self.set, other_set):
+            return self.set
+        
+        return manipulate_sets('diff', self.set, other_set)
 
 
 
 def manipulate_sets(operation, set1, set2):
 
-    if operation == 'union':
-        for key, value in set2.set.items():
+    new_set = Set()
+    for key, value in set2.set.items():
+        if operation == 'union':
             if not set1.contains(key):
                 set1.add(key, value)
-        return set1
 
-    elif operation == 'intersect':
-        new_set = Set()
-        for key, value in set2.set.items():
+        elif operation == 'intersect':
             if set1.contains(key):
                 new_set.add(key, value)
-        return new_set
+
+        elif operation == 'diff':
+            if not set1.contains(key):
+                new_set.add(key, value)
+
+    return set1 if operation == 'union' else new_set
+
+    
+        
+        
+    
+
+
+
+
 
 def are_sets_empty(set1, set2):
     sets_empty = set1.get_size() == 0 and set2.get_size() == 0
