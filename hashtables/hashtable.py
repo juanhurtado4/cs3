@@ -1,4 +1,4 @@
-from linkedlist import LinkedList
+from linked_list import LinkedList
 
 
 class HashTable(object):
@@ -99,7 +99,14 @@ class HashTable(object):
     def set(self, key, value):
         """Insert or update the given key with its associated value.
         Best case running time: O(1) if the head of the LL is equal to the key
-        Worst case running time: O(n) if the key is tail of the LL"""
+        Worst case running time: O(n) if the key is being updated and is tail of the LL"""
+
+        #-------Helper functions-----------
+        def load_factor_exceeds_75():
+            return True if self.load_factor() > .75 else False
+
+        #----------------------------------
+
         # Find the bucket the given key belongs in
         index = self._bucket_index(key)
         bucket = self.buckets[index]
@@ -111,18 +118,17 @@ class HashTable(object):
             # Remove the old key-value entry from the bucket first
             bucket.delete(entry)
             bucket.append((key, value))
-        else:# Insert the new key-value entry into the bucket in either case
+        else: # Insert the new key-value entry into the bucket in either case
             bucket.append((key, value))
             self.size += 1
-        # TODO: Check if the load factor exceeds a threshold such as 0.75
-        # ...
-        # TODO: If so, automatically resize to reduce the load factor
-        # ...
+
+        if load_factor_exceeds_75():
+            self._resize()
 
     def delete(self, key):
         """Delete the given key and its associated value, or raise KeyError.
-        Best case running time: ??? under what conditions? [TODO]
-        Worst case running time: ??? under what conditions? [TODO]"""
+        Best case running time: O(1) if the head of the LL is equal to the key
+        Worst case running time: O(n) if the key is second to last of the LL"""
         # Find the bucket the given key belongs in
         index = self._bucket_index(key)
         bucket = self.buckets[index]
@@ -147,13 +153,20 @@ class HashTable(object):
         # Option to reduce size if buckets are sparsely filled (low load factor)
         elif new_size is 0:
             new_size = len(self.buckets) / 2  # Half size
-        # TODO: Get a list to temporarily hold all current key-value entries
-        # ...
-        # TODO: Create a new list of new_size total empty linked list buckets
-        # ...
+        
+        all_entries = self.items()
+
+        original_size = self.size
+
+        self.buckets = [LinkedList() for _ in range(new_size)]
+
         # TODO: Insert each key-value entry into the new list of buckets,
         # which will rehash them into a new bucket index based on the new size
         # ...
+        for key, value in all_entries:
+            self.set(key, value)
+        
+        self.size = original_size
 
 
 def test_hash_table():
