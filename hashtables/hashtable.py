@@ -157,13 +157,10 @@ class HashTable(object):
         all_entries = self.items()
 
         original_size = self.size
-
         self.buckets = [LinkedList() for _ in range(new_size)]
 
-        # TODO: Insert each key-value entry into the new list of buckets,
-        # which will rehash them into a new bucket index based on the new size
-        # ...
         for key, value in all_entries:
+            self.size = 0
             self.set(key, value)
         
         self.size = original_size
