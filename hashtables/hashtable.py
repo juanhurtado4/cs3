@@ -156,14 +156,11 @@ class HashTable(object):
         
         all_entries = self.items()
 
-        original_size = self.size
         self.buckets = [LinkedList() for _ in range(new_size)]
 
+        self.size = 0
         for key, value in all_entries:
-            self.size = 0
             self.set(key, value)
-        
-        self.size = original_size
 
 
 def test_hash_table():
