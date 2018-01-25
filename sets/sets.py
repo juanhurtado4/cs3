@@ -9,7 +9,8 @@ class Set():
             for element in elements:
                 self.add(element)
 
-    def get_size(self):
+    @property
+    def size(self):
         '''Returns size of the set'''
         return self.set.size
 
@@ -43,7 +44,7 @@ class Set():
         Method joins two sets while ommitting duplicate elements
         Returns set
         '''
-        if self.get_size() == 0 and other_set.get_size() == 0:
+        if self.size == 0 and other_set.size == 0:
             raise ValueError('Cannot unify empty sets')
 
         return self.manipulate_sets('union', other_set)
@@ -54,7 +55,7 @@ class Set():
         Method creates a new set based on shared elements between two sets
         Returns set
         '''
-        if self.get_size() == 0 and other_set.get_size() == 0:
+        if self.size == 0 and other_set.size == 0:
             return self.set
         
         return self.manipulate_sets('intersect', other_set)
@@ -65,7 +66,7 @@ class Set():
         Method creates a new set based on non shared elements between two sets
         Returns set
         '''
-        if self.get_size() == 0 and other_set.get_size() == 0:
+        if self.size == 0 and other_set.size == 0:
             return self.set
         
         return self.manipulate_sets('diff', other_set)
@@ -76,12 +77,12 @@ class Set():
         Method checks if other_set is a subset of self
         Returns Boolean
         '''
-        if other_set.get_size() > self.get_size():
+        if other_set.size > self.size:
             return False
 
         subset = self.manipulate_sets('intersect', other_set)
 
-        return True if subset.get_size() == other_set.get_size() else False
+        return True if subset.size == other_set.size else False
 
     # ----------Helper function----------------
     def manipulate_sets(self, operation, set2):
