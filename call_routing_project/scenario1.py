@@ -1,5 +1,5 @@
-def get_cost(phone_num):
-    with open('erase_carrier_route.txt') as file:
+def get_cost(phone_num, file_name):
+    with open(file_name) as file:
         previous = ''
         for carrier_route in file.readlines():
             arr_route = carrier_route.split(',')
