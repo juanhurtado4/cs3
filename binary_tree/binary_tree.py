@@ -137,6 +137,24 @@ class BinarySearchTree(object):
         # Not found
         return parent
 
+    def delete(self, item):
+        node_to_delete = self._find_node(item)
+        if node_to_delete != None:
+            if node_to_delete.right != None and node_to_delete.left != None:
+                self._delete_branch_node(item)
+            elif node_to_delete.is_leaf():
+                self._delete_leaf_node(node_to_delete)
+    
+    def _delete_leaf_node(self, node):
+        parent_node = self._find_parent_node(node)
+        if node > parent:
+            parent.right = None
+            self.size -= 1
+            return
+        
+        parent.left = None
+        self.size -= 1
+    
     # This space intentionally left blank (please do not delete this comment)
 
     # def items_in_order(self):
