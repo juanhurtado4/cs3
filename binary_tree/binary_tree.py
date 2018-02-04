@@ -89,9 +89,9 @@ class BinarySearchTree(object):
             return
         # Find the parent node of where the given item should be inserted
         parent = self._find_parent_node(item)
-        if item < parent:
+        if item < parent.data:
             parent.left = BinaryTreeNode(item)
-        elif item > parent:
+        elif item > parent.data:
             parent.right = BinaryTreeNode(item)
         self.size += 1
 
@@ -104,12 +104,11 @@ class BinarySearchTree(object):
         node = self.root
         # Loop until we descend past the closest leaf node
         while node is not None:
-            # TODO: Check if the given item matches the node's data
-            if ...:
+            if item == node.data:
                 # Return the found node
                 return node
             # TODO: Check if the given item is less than the node's data
-            elif ...:
+            elif item < node.data:
                 # TODO: Descend to the node's left child
                 node = ...
             # TODO: Check if the given item is greater than the node's data
