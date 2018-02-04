@@ -107,14 +107,10 @@ class BinarySearchTree(object):
             if item == node.data:
                 # Return the found node
                 return node
-            # TODO: Check if the given item is less than the node's data
             elif item < node.data:
-                # TODO: Descend to the node's left child
-                node = ...
-            # TODO: Check if the given item is greater than the node's data
-            elif ...:
-                # TODO: Descend to the node's right child
-                node = ...
+                node = node.left
+            elif item > node.data:
+                node = node.right
         # Not found
         return None
 
