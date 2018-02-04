@@ -140,21 +140,54 @@ class BinarySearchTree(object):
     def delete(self, item):
         node_to_delete = self._find_node(item)
         if node_to_delete != None:
+            parent_node = self._find_parent_node(node)
             if node_to_delete.right != None and node_to_delete.left != None:
-                self._delete_branch_node(item)
+                self._delete_branch_node(node_to_delete, parent_node, 2)
             elif node_to_delete.is_leaf():
-                self._delete_leaf_node(node_to_delete)
+                self._delete_leaf_node(node_to_delete, parent_node)
+            else:
+                self._delete_branch_node(item, parent_node)
     
-    def _delete_leaf_node(self, node):
-        parent_node = self._find_parent_node(node)
-        if node > parent:
+    def _delete_leaf_node(self, node, parent):
+        if node.data > parent.data:
             parent.right = None
             self.size -= 1
             return
         
         parent.left = None
         self.size -= 1
-    
+        
+    def _delete_branch_node(self, node, parent, children=1):
+        assert 0 < children < 3
+        if children == 1:
+            if parent.left != None and node.left != None:
+                parent.left = node.left
+            elif parent.left != None and node.right != None:
+                parent.left = node.right
+            elif parent.right != None and node.left != None:
+                parent.right = node.left
+            elif parent.right != None and node.right != None:
+                parent.right = node.right
+        else:
+            prev = None
+            if parent.right == node:
+                direction = 'right'
+            elif prent.left == node:
+                direction = 'left'
+
+            successor = self.find_successor(node)
+
+            if direction == 'right':
+
+
+    def find_successor(self, node):
+        node = node.right
+        while node.left != None:
+            node = node.left
+        return node
+
+
+
     # This space intentionally left blank (please do not delete this comment)
 
     # def items_in_order(self):
