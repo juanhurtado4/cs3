@@ -1,6 +1,6 @@
-from binarysearchtree import BinarySearchTree, BinaryTreeNode
+from binary_tree import BinarySearchTree, BinaryTreeNode
 import unittest
-
+import pytest
 
 class BinaryTreeNodeTest(unittest.TestCase):
 
@@ -44,6 +44,44 @@ class BinaryTreeNodeTest(unittest.TestCase):
         # Detach right child node
         node.right = None
         assert node.is_branch() is False
+    
+    def test_height(self):
+        # Create node with no children
+        root_node = BinaryTreeNode(10)
+        child_node4 = BinaryTreeNode(4)
+        child_node3 = BinaryTreeNode(3)
+        child_node7 = BinaryTreeNode(7)
+        child_node20 = BinaryTreeNode(20)
+        child_node15 = BinaryTreeNode(15)
+        child_node22 = BinaryTreeNode(22)
+        child_node21 = BinaryTreeNode(21)
+        root_node.left = child_node4
+        root_node.right = child_node20
+        child_node4.left = child_node3
+        child_node4.right = child_node7
+        child_node20.left = child_node15
+        child_node20.right = child_node22
+        child_node22.left = child_node21
+        '''
+        BST Visualization:
+                 10
+               /    \
+              4      20
+             / \    /   \
+            3   7  15    22
+                        /
+                       21  
+        '''
+        assert root_node.get_height() == 3
+        assert child_node20.get_height() == 2
+        assert child_node4.get_height() == 1
+        assert child_node22.get_height() == 1
+        assert child_node3.get_height() == 0
+        assert child_node7.get_height() == 0
+        assert child_node15.get_height() == 0
+        assert child_node21.get_height() == 0
+        
+        
 
 
 class BinarySearchTreeTest(unittest.TestCase):
