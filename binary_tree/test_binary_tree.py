@@ -247,7 +247,7 @@ class BinarySearchTreeTest(unittest.TestCase):
         assert tree.contains(2) == True
         tree.delete(2)
         assert tree.contains(2) == False
-        # Check ror the correct node to take place of the deleted node
+        # Check for the correct node to take place of the deleted node
         assert tree.root.left.data == 3
         assert tree.root.left.is_leaf() == True
         assert tree.size == 4
@@ -255,10 +255,63 @@ class BinarySearchTreeTest(unittest.TestCase):
         assert tree.contains(6) == True
         tree.delete(6)
         assert tree.contains(6) == False
-        # Check ror the correct node to take place of the deleted node
+        # Check for the correct node to take place of the deleted node
         assert tree.root.right.data == 5
         assert tree.root.right.is_leaf() == True
         assert tree.size == 3
+        
+    def test_delete_branch_nodes_with_2_children(self):
+        items = [4, 2, 6, 1, 3, 5, 7]
+        tree = BinarySearchTree(items)
+        assert tree.contains(2) == True
+        tree.delete(2)
+        assert tree.contains(2) == False
+        # Check for the correct node to take place of the deleted node
+        assert tree.root.left.data == 3
+        assert tree.root.left.right == None
+        assert tree.root.left.left.data == 1
+        assert tree.size == 6
+
+        assert tree.contains(6) == True
+        tree.delete(6)
+        assert tree.contains(6) == False
+        # Check for the correct node to take place of the deleted node
+        assert tree.root.right.data == 7
+        assert tree.root.right.right == None
+        assert tree.root.right.left.data == 5
+        assert tree.size == 5
+
+        # Delete root node on a full tree where successor is leaf
+        items2 = [4, 2, 6, 1, 3, 5, 7]        
+        tree2 = BinarySearchTree(items2)
+        tree2.delete(4)
+        assert tree2.root.data == 5
+        assert tree2.size == 6
+
+        # Delete root node on a full tree where successor has 1 child
+        items3 = [4, 2, 7, 1, 3, 5, 6, 8]        
+        tree3 = BinarySearchTree(items3)
+        assert tree3.size == 8
+        # Check that the correct successor is found
+        successor = tree3._find_successor(tree3.root)
+        # Check that successor has correct child
+        assert successor.data == 5
+        assert successor.right.data == 6
+        assert successor.left == None
+        tree3.delete(4)
+        # Check if successor took the place of root
+        assert tree3.root.data == 5
+        # Check left side of tree is intact
+        assert tree3.root.left.data == 2
+        assert tree3.root.left.left.data == 1
+        assert tree3.root.left.right.data == 3
+        # Check right side of tree is intact
+        assert tree3.root.right.data == 7
+        assert tree3.root.right.left.data == 6
+        assert tree3.root.right.right.data == 8
+        assert tree3.root.right.left.is_leaf() == True
+        assert tree3.root.right.right.is_leaf() == True
+        assert tree3.size == 7
         
 
     # This space intentionally left blank (please do not delete this comment)
