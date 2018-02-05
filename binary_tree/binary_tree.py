@@ -141,7 +141,7 @@ class BinarySearchTree(object):
         node_to_delete = self._find_node(item)
         if node_to_delete != None:
             self.size -= 1
-            parent_node = self._find_parent_node(node_to_delete)
+            parent_node = self._find_parent_node(node_to_delete.data)
             if node_to_delete.right != None and node_to_delete.left != None:
                 self._delete_branch_node(node_to_delete, parent_node, 2)
             elif node_to_delete.is_leaf():
@@ -332,4 +332,13 @@ def test_binary_search_tree():
 
 
 if __name__ == '__main__':
-    test_binary_search_tree()
+    # test_binary_search_tree()
+    def test_delete_7_items():
+        # Create a complete binary search tree of 7 items in level-order
+        items = [4, 2, 6, 1, 3, 5, 7]
+        tree = BinarySearchTree(items)
+        assert tree.contains(1) == True
+        tree.delete(1)
+        assert tree.contains(1) == False
+
+    test_delete_7_items()
