@@ -159,10 +159,10 @@ class BinarySearchTree(object):
         
         parent.left = None
         
-    def _delete_branch_node(self, node, parent, children=1):
-        assert 0 < children < 3
-        direction = 'right' if parent.right == node else 'left'
-        if children == 1:
+    def _delete_branch_node(self, node, parent, num_node_children=1):
+        assert 0 < num_node_children < 3
+        if num_node_children == 1:
+            direction = 'right' if parent.right == node else 'left'
             node_child = node.right if node.right != None else node.left
             if direction == 'right':
                 parent.right = node_child
@@ -170,14 +170,11 @@ class BinarySearchTree(object):
                 parent.left = node_child
         else:
             successor = self._find_successor(node)
-            successor.left = node.left
-            if successor.is_leaf() and node.right != successor:
-                successor.right = node.right
-            if direction == 'right':
-                parent.right = successor
-            else:
-                parent.left = successor
-
+            self.delete(successor.data)
+            # Increase the size since recursive call to delete removes 2 from self.size 
+            self.size += 1
+            node.data = successor.data
+    
     def _find_successor(self, node):
         node = node.right
         while node.left != None:
