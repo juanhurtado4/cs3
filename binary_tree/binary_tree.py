@@ -140,47 +140,42 @@ class BinarySearchTree(object):
     def delete(self, item):
         node_to_delete = self._find_node(item)
         if node_to_delete != None:
-            parent_node = self._find_parent_node(node)
+            self.size -= 1
+            parent_node = self._find_parent_node(node_to_delete)
             if node_to_delete.right != None and node_to_delete.left != None:
                 self._delete_branch_node(node_to_delete, parent_node, 2)
             elif node_to_delete.is_leaf():
                 self._delete_leaf_node(node_to_delete, parent_node)
             else:
-                self._delete_branch_node(item, parent_node)
+                self._delete_branch_node(node_to_delete, parent_node)
     
     def _delete_leaf_node(self, node, parent):
         if node.data > parent.data:
             parent.right = None
-            self.size -= 1
             return
         
         parent.left = None
-        self.size -= 1
         
     def _delete_branch_node(self, node, parent, children=1):
         assert 0 < children < 3
+        direction = 'right' if parent.right == node else 'left'
         if children == 1:
-            if parent.left != None and node.left != None:
-                parent.left = node.left
-            elif parent.left != None and node.right != None:
-                parent.left = node.right
-            elif parent.right != None and node.left != None:
-                parent.right = node.left
-            elif parent.right != None and node.right != None:
-                parent.right = node.right
-        else:
-            prev = None
-            if parent.right == node:
-                direction = 'right'
-            elif prent.left == node:
-                direction = 'left'
-
-            successor = self.find_successor(node)
-
+            node_child = node.right if node.right != None else node.left
             if direction == 'right':
+                parent.right = node_child
+            else:
+                parent.left = node_child
+        else:
+            successor = self._find_successor(node)
+            successor.left = node.left
+            if successor.is_leaf() and node.right != successor:
+                successor.right = node.right
+            if direction == 'right':
+                parent.right = successor
+            else:
+                parent.left = successor
 
-
-    def find_successor(self, node):
+    def _find_successor(self, node):
         node = node.right
         while node.left != None:
             node = node.left
