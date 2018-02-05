@@ -241,18 +241,25 @@ class BinarySearchTreeTest(unittest.TestCase):
         assert tree2.contains(1) == False
 
 
-    def test_delete_branch_nodes(self):
-        pass
-        # tree.insert(3)
-        # assert tree.root.left.right.data == 3
+    def test_delete_branch_nodes_with_one_child(self):
+        items = [4, 2, 6, 3, 5]
+        tree = BinarySearchTree(items)
+        assert tree.contains(2) == True
+        tree.delete(2)
+        assert tree.contains(2) == False
+        # Check ror the correct node to take place of the deleted node
+        assert tree.root.left.data == 3
+        assert tree.root.left.is_leaf() == True
+        assert tree.size == 4
 
-        # assert tree.contains(2) == True
-        # tree.delete(2)
-        # assert tree.contains(3) == False
-        # # Check that deepest right leaf on left side of tree is none
-        # assert tree.root.left.right == None
-        # tree.insert(3)
-        # assert tree.root.left.right.data == 3
+        assert tree.contains(6) == True
+        tree.delete(6)
+        assert tree.contains(6) == False
+        # Check ror the correct node to take place of the deleted node
+        assert tree.root.right.data == 5
+        assert tree.root.right.is_leaf() == True
+        assert tree.size == 3
+        
 
     # This space intentionally left blank (please do not delete this comment)
 
