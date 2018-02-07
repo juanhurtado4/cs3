@@ -95,24 +95,24 @@ class BinarySearchTree(object):
             parent.right = BinaryTreeNode(item)
         self.size += 1
 
-    # def _find_node(self, item):
-    #     """Return the node containing the given item in this binary search tree,
-    #     or None if the given item is not found.
-    #     TODO: Best case running time: ??? under what conditions?
-    #     TODO: Worst case running time: ??? under what conditions?"""
-    #     # Start with the root node
-    #     node = self.root
-    #     # Loop until we descend past the closest leaf node
-    #     while node is not None:
-    #         if item == node.data:
-    #             # Return the found node
-    #             return node
-    #         elif item < node.data:
-    #             node = node.left
-    #         elif item > node.data:
-    #             node = node.right
-    #     # Not found
-    #     return None
+    def _find_node_iterative(self, item):
+        """Iterative SOLUTIONReturn the node containing the given item in this binary search tree,
+        or None if the given item is not found.
+        TODO: Best case running time: ??? under what conditions?
+        TODO: Worst case running time: ??? under what conditions?"""
+        # Start with the root node
+        node = self.root
+        # Loop until we descend past the closest leaf node
+        while node is not None:
+            if item == node.data:
+                # Return the found node
+                return node
+            elif item < node.data:
+                node = node.left
+            elif item > node.data:
+                node = node.right
+        # Not found
+        return None
 
     def _find_node(self, item, node=None):
         """
@@ -138,8 +138,38 @@ class BinarySearchTree(object):
         elif item > node.data and node.right != None:
             return self._find_node(item, node.right)
 
-    def _find_parent_node(self, item):
-        """Return the parent node of the node containing the given item
+    def _find_parent_node(self, item, parent=None, node=None):
+        """RECURSIVE
+        Return the parent node of the node containing the given item
+        (or the parent node of where the given item would be if inserted)
+        in this tree, or None if this tree is empty or has only a root node.
+        TODO: Best case running time: ??? under what conditions?
+        TODO: Worst case running time: ??? under what conditions?"""
+
+        if self.is_empty():
+            return None
+
+        # Set node if first time method was called
+        elif node is None and parent is None:
+            node = self.root
+
+        # Return parent once we are at the position were item would be inserted
+        elif node is None:
+            return parent
+
+        if item == node.data:
+            # Return the parent of the found node
+            return parent
+
+        elif item < node.data:
+            return self._find_parent_node(item, node, node.left)
+
+        elif item > node.data:
+            return self._find_parent_node(item, node, node.right)
+
+    def _find_parent_node_iterative(self, item):
+        """ITERATIVE SOLUTION
+        Return the parent node of the node containing the given item
         (or the parent node of where the given item would be if inserted)
         in this tree, or None if this tree is empty or has only a root node.
         TODO: Best case running time: ??? under what conditions?
@@ -351,8 +381,11 @@ def test_binary_search_tree():
 
 if __name__ == '__main__':
     # test_binary_search_tree()
-    tree2 = BinarySearchTree([1])
-    tree2.delete(1)
-    assert tree2.size == 0
-    assert tree2.root == None
-    assert tree2.contains(1) == False
+    tree = BinarySearchTree()
+    assert tree.size == 0
+    tree.insert('B')
+    assert tree.size == 1
+    tree.insert('A')
+    assert tree.size == 2
+    tree.insert('C')
+    assert tree.size == 3
