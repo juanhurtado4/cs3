@@ -2,7 +2,8 @@ def is_sorted(items):
     """Return a boolean indicating whether given items are in sorted order.
     TODO: Running time: O(n) to check each item in the arr. O(1) if first item is not sorted, since it returns False right away
     TODO: Memory usage: O(1) if using generators because generators do not create the entire range of indexes of items or if using a counter."""
-
+    if len(items) == 0:
+        return True
     for ind, item in enumerate(items):
         # Prevent from checking an index that is outside the range of items
         if ind + 1 == len(items):
@@ -18,29 +19,28 @@ def bubble_sort(items):
     TODO: Running time: ??? Why and under what conditions?
     TODO: Memory usage: ??? Why and under what conditions?"""
     def swap(ind, ind2):
+        '''ind: int, ind2: int
+        function swaps two items in an arr. Returns None'''
+        # Insert a copy of the smaller item into correct position
         items.insert(ind, items[ind2])
+        # Delete old smaller item from arr
         items.pop(ind2 + 1)
 
     (is_sorted, last_sorted) = (False, len(items))
     while not is_sorted:
         is_sorted = True
         for ind, left_item in enumerate(items):
-            # # Prevent index out of range
-            # if ind + 1 == len(items):
-            #     break
-
             # Prevent double checking a sorted item                
             if ind + 1 >= last_sorted:
                 break
 
             right_item = items[ind + 1]
+            # Check if not in order
             if left_item > right_item:
                 is_sorted = False
                 swap(ind, ind + 1)
+        # Update position of last sorted item to prevent double checking
         last_sorted -= 1
-
-# initial_items = [2, 16, 20, 7, 11, 8, 15, 17, 14, 5]
-# bubble_sort(initial_items)
 
 def selection_sort(items):
     """Sort given items by finding minimum item, swapping it with first
