@@ -1,7 +1,7 @@
 def is_sorted(items):
     """Return a boolean indicating whether given items are in sorted order.
-    TODO: Running time: O(n) to check each item in the arr. O(1) if first item is not sorted, since it returns False right away
-    TODO: Memory usage: O(1) if using generators because generators do not create the entire range of indexes of items or if using a counter."""
+    Running time: O(n) to check each item in the arr. O(1) if first item is not sorted, since it returns False right away.
+    Memory usage: O(1) if using generators because generators do not create the entire range of indexes of items or if using a counter."""
     if len(items) == 0:
         return True
     for ind, item in enumerate(items):
