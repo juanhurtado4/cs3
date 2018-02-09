@@ -17,24 +17,30 @@ def bubble_sort(items):
     repeating until all items are in sorted order.
     TODO: Running time: ??? Why and under what conditions?
     TODO: Memory usage: ??? Why and under what conditions?"""
-    def swap(*args):
-        (arr, ind, ind2) = args
-        (arr_beggining, arr_end) = (arr[:ind], arr[ind2 + 1:])
-        return arr_beggining + arr[ind2] + arr[ind] + arr_end
+    def swap(ind, ind2):
+        items.insert(ind, items[ind2])
+        items.pop(ind2 + 1)
 
-    (is_sorted, arr_len) = (False, len(item) - 1)
+    (is_sorted, last_sorted) = (False, len(items))
     while not is_sorted:
         is_sorted = True
-        for ind in arr_len:
-            (left_item, right_item) = (items[ind], items[ind + 1])
+        for ind, left_item in enumerate(items):
+            # # Prevent index out of range
+            # if ind + 1 == len(items):
+            #     break
+
+            # Prevent double checking a sorted item                
+            if ind + 1 >= last_sorted:
+                break
+
+            right_item = items[ind + 1]
             if left_item > right_item:
                 is_sorted = False
-                swap()
+                swap(ind, ind + 1)
+        last_sorted -= 1
 
-        # Shorten the arr to not double check a sorted item
-        arr_len -= 1
-
-
+# initial_items = [2, 16, 20, 7, 11, 8, 15, 17, 14, 5]
+# bubble_sort(initial_items)
 
 def selection_sort(items):
     """Sort given items by finding minimum item, swapping it with first
