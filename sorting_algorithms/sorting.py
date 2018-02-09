@@ -1,7 +1,7 @@
 def is_sorted(items):
     """Return a boolean indicating whether given items are in sorted order.
-    TODO: Running time: ??? Why and under what conditions?
-    TODO: Memory usage: O(1) if using generators because generators do not create the entire  O(n) """
+    TODO: Running time: O(n) to check each item in the arr. O(1) if first item is not sorted, since it returns False right away
+    TODO: Memory usage: O(1) if using generators because generators do not create the entire range of indexes of items or if using a counter."""
 
     for ind, item in enumerate(items):
         # Prevent from checking an index that is outside the range of items
@@ -17,8 +17,23 @@ def bubble_sort(items):
     repeating until all items are in sorted order.
     TODO: Running time: ??? Why and under what conditions?
     TODO: Memory usage: ??? Why and under what conditions?"""
-    # TODO: Repeat until all items are in sorted order
-    # TODO: Swap adjacent items that are out of order
+    def swap(*args):
+        (arr, ind, ind2) = args
+        (arr_beggining, arr_end) = (arr[:ind], arr[ind2 + 1:])
+        return arr_beggining + arr[ind2] + arr[ind] + arr_end
+
+    (is_sorted, arr_len) = (False, len(item) - 1)
+    while not is_sorted:
+        is_sorted = True
+        for ind in arr_len:
+            (left_item, right_item) = (items[ind], items[ind + 1])
+            if left_item > right_item:
+                is_sorted = False
+                swap()
+
+        # Shorten the arr to not double check a sorted item
+        arr_len -= 1
+
 
 
 def selection_sort(items):
