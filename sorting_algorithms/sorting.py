@@ -18,15 +18,8 @@ def bubble_sort(items):
     repeating until all items are in sorted order.
     TODO: Running time: ??? Why and under what conditions?
     TODO: Memory usage: ??? Why and under what conditions?"""
-    def swap(ind, ind2):
-        '''ind: int, ind2: int
-        function swaps two items in an arr. Returns None'''
-        # Insert a copy of the smaller item into correct position
-        items.insert(ind, items[ind2])
-        # Delete old smaller item from arr
-        items.pop(ind2 + 1)
 
-    (is_sorted, last_sorted) = (False, len(items))
+    is_sorted, last_sorted = False, len(items)
     while not is_sorted:
         is_sorted = True
         for ind, left_item in enumerate(items):
@@ -38,7 +31,9 @@ def bubble_sort(items):
             # Check if not in order
             if left_item > right_item:
                 is_sorted = False
-                swap(ind, ind + 1)
+                # swap items
+                items[ind], items[ind + 1] = items[ind + 1], items[ind]
+                
         # Update position of last sorted item to prevent double checking
         last_sorted -= 1
 
