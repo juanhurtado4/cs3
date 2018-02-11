@@ -43,8 +43,32 @@ def selection_sort(items):
     TODO: Running time: ??? Why and under what conditions?
     TODO: Memory usage: ??? Why and under what conditions?"""
     # TODO: Repeat until all items are in sorted order
-    # TODO: Find minimum item in unsorted items
-    # TODO: Swap it with first unsorted item
+    last_sorted_ind, is_sorted, ind_smallest = 0, False, 0
+    len_items = range(len(items))
+    while not is_sorted:
+        for ind in len_items:
+            if ind + 1 == len(items):
+                break
+            if items[ind_smallest] > items[ind + 1]:
+                ind_smallest = ind + 1
+
+        if last_sorted_ind == len(items):
+            return
+        curr_smallest, unsorted = items[ind_smallest], items[last_sorted_ind]
+        # swap current smallest item with the first unsorted item
+        items[ind_smallest], items[last_sorted_ind] = unsorted, curr_smallest
+
+
+        last_sorted_ind += 1
+        # Reset index to the first item in unsorted arr
+        ind_smallest = last_sorted_ind
+        len_items = range(last_sorted_ind, len(items))
+        # Break out of loop if all items are sorted
+        is_sorted = True if last_sorted_ind == len(items) else False
+
+
+
+selection_sort([20, 5, 10, 6, 18, 19, 20, 15, 4, 12])
 
 
 def insertion_sort(items):
