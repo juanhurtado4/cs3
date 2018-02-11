@@ -42,33 +42,45 @@ def selection_sort(items):
     unsorted item, and repeating until all items are in sorted order.
     TODO: Running time: ??? Why and under what conditions?
     TODO: Memory usage: ??? Why and under what conditions?"""
-    # TODO: Repeat until all items are in sorted order
-    last_sorted_ind, is_sorted, ind_smallest = 0, False, 0
-    len_items = range(len(items))
-    while not is_sorted:
-        for ind in len_items:
-            if ind + 1 == len(items):
-                break
-            if items[ind_smallest] > items[ind + 1]:
-                ind_smallest = ind + 1
 
-        if last_sorted_ind == len(items):
-            return
-        curr_smallest, unsorted = items[ind_smallest], items[last_sorted_ind]
-        # swap current smallest item with the first unsorted item
-        items[ind_smallest], items[last_sorted_ind] = unsorted, curr_smallest
+    for i in range(len(items)):
+        small_ind = i
+        for j in range(i + 1, len(items)):
+            # Update index to keep track of the smallest item
+            if items[j] < items[small_ind]:
+                small_ind = j
+
+        # Swap items if original index has been changed
+        if small_ind != i:
+            items[small_ind], items[i] = items[i], items[small_ind]
+
+    # last_unsorted, is_sorted, ind_smallest = 0, False, 0
+    # len_items = range(len(items))
+    # while not is_sorted:
+    #     for ind in len_items:
+    #         if ind + 1 == len(items):
+    #             break
+    #         if items[ind_smallest] > items[ind + 1]:
+    #             ind_smallest = ind + 1
+
+    #     if last_unsorted == len(items):
+    #         return
+
+    #     curr_smallest, unsorted = items[ind_smallest], items[last_unsorted]
+    #     # swap current smallest item with the first unsorted item
+    #     items[ind_smallest], items[last_unsorted] = unsorted, curr_smallest
 
 
-        last_sorted_ind += 1
-        # Reset index to the first item in unsorted arr
-        ind_smallest = last_sorted_ind
-        len_items = range(last_sorted_ind, len(items))
-        # Break out of loop if all items are sorted
-        is_sorted = True if last_sorted_ind == len(items) else False
+    #     last_unsorted += 1
+    #     # Reset index to the first item in unsorted arr
+    #     ind_smallest = last_unsorted
+    #     len_items = range(last_unsorted, len(items))
+    #     # Break out of loop if all items are sorted
+    #     is_sorted = True if last_unsorted == len(items) else False
 
 
 
-selection_sort([20, 5, 10, 6, 18, 19, 20, 15, 4, 12])
+    
 
 
 def insertion_sort(items):
