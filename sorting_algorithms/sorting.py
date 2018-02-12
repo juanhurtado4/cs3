@@ -43,40 +43,42 @@ def selection_sort(items):
     TODO: Running time: ??? Why and under what conditions?
     TODO: Memory usage: ??? Why and under what conditions?"""
 
-    for i in range(len(items)):
-        small_ind = i
-        small_ind = 1
-        for j in range(i + 1, len(items)):
-            # Update index to keep track of the smallest item
-            if items[j] < items[small_ind]:
-                small_ind = j
+    # for i in range(len(items)):
+    #     small_ind = i
+    #     small_ind = 1
+    #     if small_ind + 1 == len(items):
+    #         break
+    #     for j in range(i + 1, len(items)):
+    #         # Update index to keep track of the smallest item
+    #         if items[j] < items[small_ind]:
+    #             small_ind = j
 
-        # Swap items if original index has been changed
-        if small_ind != i:
-            items[small_ind], items[i] = items[i], items[small_ind]
+    #     # Swap items if original index has been changed
+    #     if small_ind != i:
+    #         items[small_ind], items[i] = items[i], items[small_ind]
 
-    # last_unsorted, is_sorted, ind_smallest = 0, False, 0
-    # len_items = range(len(items))
-    # while not is_sorted:
-    #     for ind in len_items:
-    #         if ind + 1 == len(items):
-    #             break
-    #         if items[ind_smallest] > items[ind + 1]:
-    #             ind_smallest = ind + 1
+    last_unsorted, is_sorted, ind_smallest = 0, False, 0
+    len_items = range(len(items))
+    while not is_sorted:
+        for ind in len_items:
+            if ind + 1 == len(items):
+                break
+            if items[ind_smallest] > items[ind + 1]:
+                ind_smallest = ind + 1
 
-    #     if last_unsorted == len(items):
-    #         return
+        if last_unsorted == len(items):
+            return
 
-    #     curr_smallest, unsorted = items[ind_smallest], items[last_unsorted]
-    #     # swap current smallest item with the first unsorted item
-    #     items[ind_smallest], items[last_unsorted] = unsorted, curr_smallest
+        curr_smallest, unsorted = items[ind_smallest], items[last_unsorted]
+        # swap current smallest item with the first unsorted item
+        items[ind_smallest], items[last_unsorted] = unsorted, curr_smallest
 
-    #     last_unsorted += 1
-    #     # Reset index to the first item in unsorted arr
-    #     ind_smallest = last_unsorted
-    #     len_items = range(last_unsorted, len(items))
-    #     # Break out of loop if all items are sorted
-    #     is_sorted = True if last_unsorted == len(items) else False
+        last_unsorted += 1
+        # Reset index to the first item in unsorted arr
+        ind_smallest = last_unsorted
+        len_items = range(last_unsorted, len(items))
+        # Break out of loop if all items are sorted
+        is_sorted = True if last_unsorted == len(items) else False
 
 def insertion_sort(items):
     """Sort given items by taking first unsorted item, inserting it in sorted
@@ -105,6 +107,28 @@ def merge(items1, items2):
     # TODO: Repeat until one list is empty
     # TODO: Find minimum item in both lists and append it to new list
     # TODO: Append remaining items in non-empty list to new list
+
+    new_list, ind1, ind2 = [], 0, 0
+    while ind1 < len(items1):
+        if ind2 == len(items2):
+            # add all items of list1 if list2 has been exausted
+            for index in range(ind1, len(items1)):
+                new_list.append(items1[index])
+            return new_list
+
+        if items1[ind1] < items2[ind2]:
+            new_list.append(items1[ind1])
+            ind1 += 1
+        else:
+            new_list.append(items2[ind2])
+            ind2 += 1
+    
+    # add all items of list2 if list2 has remaining items and 
+    # list1 has been exausted
+    if len(new_list) != len(items1) + len(items2):
+        for index in range(ind2, len(items2)):
+            new_list.append(items2[index])
+    return new_list
 
 
 def split_sort_merge(items):
