@@ -137,13 +137,14 @@ def split_sort_merge(items):
     a list in sorted order.
     TODO: Running time: ??? Why and under what conditions?
     TODO: Memory usage: ??? Why and under what conditions?"""
-    # TODO: Split items list into approximately equal halves
-    # TODO: Sort each half using any other sorting algorithm
-    # TODO: Merge sorted halves into one list in sorted order
+    # list with 0 or 1 items are sorted by default
     if len(items) < 2: return items
+    # split lists in half
     items1, items2 = items[:len(items) // 2], items[len(items) // 2: len(items)]
+    # sort each list
     insertion_sort(items1)
     insertion_sort(items2)
+    # merge two list
     return merge(items1, items2)
     
 
@@ -259,7 +260,7 @@ def test_merge():
     list12 = []
     merge_list6 = merge(list11, list12)
     assert merge_list6 == []
-    
+
 def test_split_sort_merge():
     # sort with even list
     list1 = [3, 1, 7, 13]
