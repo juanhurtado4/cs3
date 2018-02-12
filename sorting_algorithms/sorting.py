@@ -43,6 +43,7 @@ def selection_sort(items):
     TODO: Running time: ??? Why and under what conditions?
     TODO: Memory usage: ??? Why and under what conditions?"""
 
+    # TODO: Debug commented out code
     # for i in range(len(items)):
     #     small_ind = i
     #     small_ind = 1
@@ -104,9 +105,6 @@ def merge(items1, items2):
     and return a new list containing all items in sorted order.
     TODO: Running time: ??? Why and under what conditions?
     TODO: Memory usage: ??? Why and under what conditions?"""
-    # TODO: Repeat until one list is empty
-    # TODO: Find minimum item in both lists and append it to new list
-    # TODO: Append remaining items in non-empty list to new list
 
     new_list, ind1, ind2 = [], 0, 0
     while ind1 < len(items1):
@@ -116,6 +114,8 @@ def merge(items1, items2):
                 new_list.append(items1[index])
             return new_list
 
+        # append the smaller item of the two lists
+        # increase index of the list where the smaller item came from
         if items1[ind1] < items2[ind2]:
             new_list.append(items1[ind1])
             ind1 += 1
@@ -254,6 +254,6 @@ def test_merge():
     list12 = []
     merge_list6 = merge(list11, list12)
     assert merge_list6 == []
-    
+
 if __name__ == '__main__':
     main()
