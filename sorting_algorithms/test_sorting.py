@@ -4,7 +4,7 @@ import unittest
 
 
 # Change this variable to the sort function you want to test
-sort = bubble_sort
+sort = insertion_sort
 
 
 class IsSortedTest(unittest.TestCase):
@@ -96,9 +96,22 @@ class IntegerSortTest(unittest.TestCase):
         items3 = [5, 7, 3]
         sort(items3)
         assert items3 == [3, 5, 7]
-        # TODO: Write more test cases with assert equal list statements
-        # You'll need a lot more than this to test sorting algorithm robustness
-        # ...
+        items4 = [-5, 7, 3]
+        sort(items4)
+        assert items4 == [-5, 3, 7] # Negative number should be first
+        items5 = [-5, -7, 3]
+        sort(items5)
+        assert items5 == [-7, -5, 3] # Negative numbers should be in front
+        items6 = [-5, -7, -3, 0]
+        sort(items6)
+        assert items6 == [-7, -5, -3, 0] # Zero should be last
+        items7 = [-5, -7, -3]
+        sort(items7)
+        assert items7 == [-7, -5, -3] # Negative list should be in order
+        items8 = [-5]
+        sort(items8)
+        assert items8 == [-5] # List should not change
+        
 
     def test_sort_on_small_lists_of_integers_with_duplicates(self):
         items1 = [3, 3]
