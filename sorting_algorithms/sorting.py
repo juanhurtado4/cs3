@@ -259,7 +259,27 @@ def test_merge():
     list12 = []
     merge_list6 = merge(list11, list12)
     assert merge_list6 == []
-
+    
+def test_split_sort_merge():
+    # sort with even list
+    list1 = [3, 1, 7, 13]
+    sorted_list = split_sort_merge(list1)
+    assert sorted_list == [1, 3, 7, 13]
+    
+    # sort with odd list
+    list2 = [3, 1, 7, 13, 11]
+    sorted_list2 = split_sort_merge(list2)
+    assert sorted_list2 == [1, 3, 7, 11, 13]
+    
+    # sort with 1 item
+    list3 = [10]
+    sorted_list3 = split_sort_merge(list3)
+    assert sorted_list3 == [10]
+    
+    # sort with empty list
+    list4 = []
+    sorted_list4 = split_sort_merge(list4)
+    assert sorted_list4 == []
 
 if __name__ == '__main__':
     # main()
