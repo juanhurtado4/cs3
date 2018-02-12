@@ -4,7 +4,7 @@ import unittest
 
 
 # Change this variable to the sort function you want to test
-sort = bubble_sort
+sort = insertion_sort
 
 
 class IsSortedTest(unittest.TestCase):
@@ -194,9 +194,16 @@ class StringSortTest(unittest.TestCase):
         items3 = ['B', 'C', 'A']
         sort(items3)
         assert items3 == ['A', 'B', 'C']
-        # TODO: Write more test cases with assert equal list statements
-        # You'll need a lot more than this to test sorting algorithm robustness
-        # ...
+        items1 = ['A', 'A']
+        sort(items1)
+        assert items1 == ['A', 'A']  # List should not be changed
+        items2 = ['B', 'A', 'A', 'B']
+        sort(items2)
+        assert items2 == ['A', 'A', 'B', 'B']  # List should be in sorted order
+        items3 = ['B', 'C', 'A', 'C', 'C', 'A', 'B', 'A', 'A']
+        sort(items3)
+        assert items3 == ['A', 'A', 'A', 'A', 'B', 'B', 'C', 'C', 'C']
+        
 
     def test_sort_on_fish_book_title(self):
         items = 'one fish two fish red fish blue fish'.split()
