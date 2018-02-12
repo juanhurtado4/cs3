@@ -140,12 +140,12 @@ def split_sort_merge(items):
     # TODO: Split items list into approximately equal halves
     # TODO: Sort each half using any other sorting algorithm
     # TODO: Merge sorted halves into one list in sorted order
-
-    items1 = insertion_sort(items[:len(items) / 2))
-    items2 = insertion_sort(items[len(items) / 2: len(items)))
+    if len(items) < 2: return items
+    items1, items2 = items[:len(items) // 2], items[len(items) // 2: len(items)]
+    insertion_sort(items1)
+    insertion_sort(items2)
     return merge(items1, items2)
     
-
 
 def merge_sort(items):
     """Sort given items by splitting list into two approximately equal halves,
@@ -260,41 +260,7 @@ def test_merge():
     merge_list6 = merge(list11, list12)
     assert merge_list6 == []
 
-def test_split_sort_merge():
-    # merge with full list
-    list1 = [1, 3, 7, 11, 13]
-    merge_list = merge(list1, list2)
-    assert merge_list == [1, 2, 3, 4, 5, 7, 9, 11, 13, 14]
-    
-    # merge with uneven first list
-    list3 = [1, 3, 7, 11, 13]
-    list4 = [2, 4, 5, 9, 14, 17, 20]
-    merge_list2 = merge(list3, list4)
-    assert merge_list2 == [1, 2, 3, 4, 5, 7, 9, 11, 13, 14, 17, 20]
-
-    # merge with uneven second list
-    list5 = [1, 3, 7, 11, 13, 17, 20]
-    list6 = [2, 4, 5, 9, 14]
-    merge_list3 = merge(list3, list4)
-    assert merge_list3 == [1, 2, 3, 4, 5, 7, 9, 11, 13, 14, 17, 20]
-
-    # merge empty first list
-    list7 = []
-    list8 = [2, 4, 5, 9, 14]
-    merge_list4 = merge(list7, list8)
-    assert merge_list4 == [2, 4, 5, 9, 14]
-    
-    # merge empty second list
-    list9 = [2, 4, 5, 9, 14]
-    list10 = []
-    merge_list5 = merge(list9, list10)
-    assert merge_list5 == [2, 4, 5, 9, 14]
-    
-    # merge empty lists
-    list11 = []
-    list12 = []
-    merge_list6 = merge(list11, list12)
-    assert merge_list6 == []
 
 if __name__ == '__main__':
-    main()
+    # main()
+    test_split_sort_merge()
