@@ -218,6 +218,42 @@ def main():
     # Test sort function
     test_sorting(sort_function, num_items, max_value)
 
+def test_merge():
+    # merge with even list
+    list1 = [1, 3, 7, 11, 13]
+    list2 = [2, 4, 5, 9, 14]
+    merge_list = merge(list1, list2)
+    assert merge_list == [1, 2, 3, 4, 5, 7, 9, 11, 13, 14]
+    
+    # merge with uneven first list
+    list3 = [1, 3, 7, 11, 13]
+    list4 = [2, 4, 5, 9, 14, 17, 20]
+    merge_list2 = merge(list3, list4)
+    assert merge_list2 == [1, 2, 3, 4, 5, 7, 9, 11, 13, 14, 17, 20]
 
+    # merge with uneven second list
+    list5 = [1, 3, 7, 11, 13, 17, 20]
+    list6 = [2, 4, 5, 9, 14]
+    merge_list3 = merge(list3, list4)
+    assert merge_list3 == [1, 2, 3, 4, 5, 7, 9, 11, 13, 14, 17, 20]
+
+    # merge empty first list
+    list7 = []
+    list8 = [2, 4, 5, 9, 14]
+    merge_list4 = merge(list7, list8)
+    assert merge_list4 == [2, 4, 5, 9, 14]
+    
+    # merge empty second list
+    list9 = [2, 4, 5, 9, 14]
+    list10 = []
+    merge_list5 = merge(list9, list10)
+    assert merge_list5 == [2, 4, 5, 9, 14]
+    
+    # merge empty lists
+    list11 = []
+    list12 = []
+    merge_list6 = merge(list11, list12)
+    assert merge_list6 == []
+    
 if __name__ == '__main__':
     main()
