@@ -45,6 +45,7 @@ def selection_sort(items):
 
     for i in range(len(items)):
         small_ind = i
+        small_ind = 1
         for j in range(i + 1, len(items)):
             # Update index to keep track of the smallest item
             if items[j] < items[small_ind]:
@@ -70,7 +71,6 @@ def selection_sort(items):
     #     # swap current smallest item with the first unsorted item
     #     items[ind_smallest], items[last_unsorted] = unsorted, curr_smallest
 
-
     #     last_unsorted += 1
     #     # Reset index to the first item in unsorted arr
     #     ind_smallest = last_unsorted
@@ -78,19 +78,23 @@ def selection_sort(items):
     #     # Break out of loop if all items are sorted
     #     is_sorted = True if last_unsorted == len(items) else False
 
-
-
-    
-
-
 def insertion_sort(items):
     """Sort given items by taking first unsorted item, inserting it in sorted
     order in front of items, and repeating until all items are in order.
     TODO: Running time: ??? Why and under what conditions?
     TODO: Memory usage: ??? Why and under what conditions?"""
-    # TODO: Repeat until all items are in sorted order
-    # TODO: Take first unsorted item
-    # TODO: Insert it in sorted order in front of items
+
+    for ind in range(1, len(items)):
+        # Temporarly store value at index of last unsorted item
+        item = items[ind]
+        # Find the index of where the unsorted item should go in the sorted arr
+        while ind > 0 and items[ind - 1] > item:
+            # shift the bigger item to the right
+            items[ind] = items[ind - 1]
+            # update the index of where the unsorted item will go
+            ind -= 1
+        # place the unsorted item in the right position of the sorted arr
+        items[ind] = item
 
 
 def merge(items1, items2):
