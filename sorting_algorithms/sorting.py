@@ -153,14 +153,12 @@ def merge_sort(items):
     sorting each recursively, and merging results into a list in sorted order.
     TODO: Running time: ??? Why and under what conditions?
     TODO: Memory usage: ??? Why and under what conditions?"""
-    # TODO: Check if list is so small it's already sorted (base case)
-    # list with 0 or 1 items are sorted by default
+    # list with 0 or 1 items are sorted by default (base case)
     if len(items) < 2: return items
-    # TODO: Split items list into approximately equal halves
-    # TODO: Sort each half by recursively calling merge sort
+        
     items1 = merge_sort(items[:len(items) // 2])
     items2 = merge_sort(items[len(items) // 2: len(items)])
-    # TODO: Merge sorted halves into one list in sorted order
+
     new_list = merge(items1, items2)
     # sort the original list
     if len(new_list) == len(items):
